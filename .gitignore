@@ -1,1 +1,4 @@
-test_files/*
+/src/test_files/*
+*.out
+*.swp
+lp
