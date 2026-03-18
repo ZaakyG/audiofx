@@ -15,7 +15,7 @@ typedef struct {
 
 // Define functions used
 int parse_wav(FILE *file, WAVFormat *format, long *data_offset, uint32_t *data_size);
-
+int write_out(FILE * orig, int16_t *samples, long data_offset, uint32_t data_size);
 
 int main(){
     
@@ -43,20 +43,15 @@ int main(){
     fseek(file, data_offset, SEEK_SET);
 
     // Do processing
-    int N = 2;
-    int16_t *samples = malloc(format.data_size);
-    
-    fread(samples, sizeof(int16_t), data_size, file);
+    int16_t *samples = malloc(data_size);
+    long num_samples = data_size / sizeof(int16_t); 
+    fread(samples, sizeof(int16_t), num_samples, file);
 
-    for (int i=samples; i < data_size; i++){
-        samples[i] = samples[i]/2;
-//        int sum = 0;
-//
-//        for (int j = 0; j < N; j++){
-//            sum += samples[i-j];
-//        }
+    for (int i=0; i < num_samples; i++){
+        samples[i] = samples[i]/10; 
     }
-//    samples[i] = sum/N;
+    write_out(file, samples, data_offset, data_size);   
+    free(samples);
 
 }
 
@@ -122,6 +117,33 @@ int parse_wav(FILE *file, WAVFormat *format, long *data_offset, uint32_t *data_s
 
 }
 
-int write_out(){
+// Write audio
+// format: Header, data 
+int write_out(FILE * orig, int16_t *samples, long data_offset, uint32_t data_size){
+    printf("Writing to file\n");
+    FILE *out = fopen("processed.wav", "wb");
 
+    if (out == NULL){
+       printf("Error handling output file\n");
+       return 1;
+    }
+    
+    fseek(orig, 0, SEEK_SET);
+
+    uint8_t *header = malloc(data_offset);
+    fread(header, sizeof(uint8_t), data_offset, orig);
+    fwrite(header, sizeof(uint8_t), data_offset, out); 
+
+    long num_samples = data_size/sizeof(int16_t);
+
+    fwrite(samples, sizeof(int16_t), num_samples, out);
+
+    // This could become a function
+    free(header);
+    //free(samples);
+
+    fclose(orig);
+    fclose(out);
+    
+    return 0;
 }
