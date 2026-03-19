@@ -12,6 +12,7 @@
 #include <stdbool.h>
 #include "utils.h"
 // TODO
+// Receive path for write out file, on write out function  
 
 
 int parse_wav(FILE *file, WAVFormat *format, long *data_offset, uint32_t *data_size){

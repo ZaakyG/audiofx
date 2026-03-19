@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include "utils.h"
+#include "fx.h"
 
 int main(){
     
@@ -26,14 +27,14 @@ int main(){
 
     fseek(file, data_offset, SEEK_SET);
 
-    // Do processing
+    // Prepare for processing
     int16_t *samples = malloc(data_size);
     long num_samples = data_size / sizeof(int16_t); 
     fread(samples, sizeof(int16_t), num_samples, file);
-
-    for (int i=0; i < num_samples; i++){
-        samples[i] = samples[i]/10; 
-    }
+    
+    // Apply effects
+    int factor = 2; // factor to reduce volume: volume/factor
+    volumeReduction(samples, num_samples, factor);
 
     write_out(file, samples, data_offset, data_size);   
     free(samples);
