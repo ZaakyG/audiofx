@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
+#include <stdbool.h>
 #include "utils.h"
-
 
 int main(){
     
@@ -21,12 +21,8 @@ int main(){
         printf("Parsing failed\n");
         return 1;
     }
-
-//    printf("Channels: %d\n", format.num_channels);
-//    printf("Sample rate: %d\n", format.sample_rate);
-//    printf("Bits per Sample: %d\n", format.bits_per_sample);
-//    printf("Data Offset: %ld\n", data_offset);
-//    printf("Data Size: %u \n", data_size);
+    
+    print_wav_info(&format, data_offset, data_size);
 
     fseek(file, data_offset, SEEK_SET);
 
@@ -38,6 +34,7 @@ int main(){
     for (int i=0; i < num_samples; i++){
         samples[i] = samples[i]/10; 
     }
+
     write_out(file, samples, data_offset, data_size);   
     free(samples);
 

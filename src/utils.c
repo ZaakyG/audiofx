@@ -9,7 +9,8 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
-
+#include <stdbool.h>
+#include "utils.h"
 // TODO
 
 
@@ -70,16 +71,9 @@ int parse_wav(FILE *file, WAVFormat *format, long *data_offset, uint32_t *data_s
 
         // printf("No data chunk found\n");
     } 
-    
-    bool print = true;
 
-    if (print == true){
-        printf("Channels: %d\n", format.num_channels);
-        printf("Sample rate: %d\n", format.sample_rate);
-        printf("Bits per Sample: %d\n", format.bits_per_sample);
-        printf("Data Offset: %ld\n", data_offset);
-        printf("Data Size: %u \n", data_size);
-    }
+
+
     return 0; 
 }
 
@@ -111,4 +105,16 @@ int write_out(FILE * orig, int16_t *samples, long data_offset, uint32_t data_siz
     fclose(out);
     
     return 0;
+}
+
+int print_wav_info(WAVFormat *format, long data_offset, uint32_t data_size){
+    
+   bool print = true; 
+   if (print == true){
+       printf("Channels: %d\n", format->num_channels);
+       printf("Sample rate: %d\n", format->sample_rate);
+       printf("Bits per Sample: %d\n", format->bits_per_sample);
+       printf("Data Offset: %ld\n", data_offset);
+       printf("Data Size: %u \n", data_size);
+   }
 }

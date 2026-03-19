@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
-#include "utils.c"
+//#include "utils.c"
 
 // Structs definition
 typedef struct {
@@ -22,5 +22,7 @@ int parse_wav(FILE *file, WAVFormat *format, long *data_offset, uint32_t *data_s
 // To save new file after processing
 int write_out(FILE *orig, int16_t *samples, long data_offset, uint32_t data_size);
 
+// To display wav info
+int print_wav_info(WAVFormat *format, long data_offset, uint32_t data_size);
 
 #endif
