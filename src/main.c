@@ -36,6 +36,7 @@ int main(){
     int factor = 2; // factor to reduce volume: volume/factor
     volumeReduction(samples, num_samples, factor);
 
+    // Write out to file
     write_out(file, samples, data_offset, data_size);   
     free(samples);
 

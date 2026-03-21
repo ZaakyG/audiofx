@@ -109,13 +109,16 @@ int write_out(FILE * orig, int16_t *samples, long data_offset, uint32_t data_siz
 }
 
 int print_wav_info(WAVFormat *format, long data_offset, uint32_t data_size){
-    
-   bool print = true; 
-   if (print == true){
-       printf("Channels: %d\n", format->num_channels);
-       printf("Sample rate: %d\n", format->sample_rate);
-       printf("Bits per Sample: %d\n", format->bits_per_sample);
-       printf("Data Offset: %ld\n", data_offset);
-       printf("Data Size: %u \n", data_size);
-   }
+        
+    bool print = true; 
+    if (print == true){
+        printf("Channels: %d\n", format->num_channels);
+        printf("Sample rate: %d\n", format->sample_rate);
+        printf("Bits per Sample: %d\n", format->bits_per_sample);
+        printf("Data Offset: %ld\n", data_offset);
+        printf("Data Size: %u \n", data_size);
+         
+        printf("\n");    
+    }
+
 }
