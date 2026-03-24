@@ -120,5 +120,21 @@ int print_wav_info(WAVFormat *format, long data_offset, uint32_t data_size){
          
         printf("\n");    
     }
+}
 
+int saveToPlot(int16_t *samples, long num_samples){
+    /* Saves a .dat file for easier plotting with 
+     * GNU plot. 
+     */
+    int save_factor = 1000;
+
+    FILE *plot = fopen("wave.dat","w");
+    
+    for (long i = 0; i < num_samples; i++){
+        if (i % save_factor == 0){
+            fprintf(plot, "%ld %d\n", i, samples[i]);
+        }
+    }
+    
+    fclose(plot);
 }

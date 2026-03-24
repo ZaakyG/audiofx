@@ -24,4 +24,7 @@ int write_out(FILE *orig, int16_t *samples, long data_offset, uint32_t data_size
 // To display wav info
 int print_wav_info(WAVFormat *format, long data_offset, uint32_t data_size);
 
+// To save .bat file
+int saveToPlot(int16_t *samples, long num_samples);
+
 #endif
