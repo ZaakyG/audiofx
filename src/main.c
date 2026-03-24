@@ -36,8 +36,14 @@ int main(){
     int factor = 2; // factor to reduce volume: volume/factor
     volumeReduction(samples, num_samples, factor);
 
-    // Write out to file
-    write_out(file, samples, data_offset, data_size);   
+
+    // Write out to files
+    // TODO 
+    // - Configure path to write out
+    // - Configure path to plot
+    write_out(file, samples, data_offset, data_size); // writes processed
+//    saveToPlot(samples, num_samples);
+    
     free(samples);
 
 }
