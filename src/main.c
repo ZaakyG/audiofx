@@ -3,8 +3,8 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdbool.h>
-#include "utils.h"
-#include "fx.h"
+#include "utils/utils.h"
+#include "effects/fx.h"
 
 int main(){
     
