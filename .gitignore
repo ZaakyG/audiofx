@@ -5,3 +5,5 @@ lp
 *.wav
 src/test
 *.dat
+app
+test_files/*
