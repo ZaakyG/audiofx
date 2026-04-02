@@ -4,7 +4,19 @@
 #include <math.h>
 
 #define SAMPLE_RATE 44100
-#define FRAMES_PER_BUFFER 512
+#define FRAMES_PER_BUFFER 512// Create db function
+                             //
+float db_convert(float rms){
+    float db = 20.0f * log10f(rms + 1e-6f);
+    return db;
+}
+
+float linscale(float x){
+    float intercept = 90;
+    float y = intercept * x - intercept;
+    //printf("Scale conversion: %f\n", y);
+    return y;
+}
 
 // Create function to convert to rms
 void rms_display(const float *in)  {
@@ -17,17 +29,21 @@ void rms_display(const float *in)  {
     
     // Create status bar.
     // First convert to an scale
-    int scale = 50; 
-    int status = (int) rms/scale;
+    // Convert to dB
+    float db;
+    float scale = 20; 
+    db = db_convert(rms); 
+
+
     printf("\rLevel: [");
-    for(int i = 0; i < scale; i++){
-        if (i <= rms){
+    for(int i = 0; i <= scale; i++){
+        if (linscale(i/scale) < db){
             printf("#");
         } else {
-            printf(" ");
-        } 
+            printf("-");
+        }
     }
-    printf("]  %0.5f   ",rms);
+    printf("]  %0.5f   ", db);
     //printf("\rRMS: %f", rms);
     fflush(stdout);
 }
@@ -82,7 +98,7 @@ int main(void){
     Pa_Terminate();
    
      
-    printf("\r");    
+    // printf("\r");    
     fflush(stdout);
     printf("\n");    
     return 0;
