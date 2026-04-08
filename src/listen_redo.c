@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <portaudio.h>
 #include <math.h>
-#include "utils/utils.c"
 
 #define SAMPLE_RATE 44100
 #define FRAMES_PER_BUFFER 512// Create db function

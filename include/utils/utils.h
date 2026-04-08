@@ -1,9 +1,5 @@
 #ifndef UTILS_H
 #define UTILS_H
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <string.h>
 
 // Structs definition
 typedef struct {
@@ -26,5 +22,15 @@ int print_wav_info(WAVFormat *format, long data_offset, uint32_t data_size);
 
 // To save .bat file
 int saveToPlot(int16_t *samples, long num_samples);
+
+// Functions from live listen
+// dB conversion to rms
+float dbToRms(float rms);
+
+// Converts rms to linear scale for plotting
+float linscale(float x);
+
+// Function for status bar
+void rms_display(const float *in);
 
 #endif
