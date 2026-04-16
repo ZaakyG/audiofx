@@ -10,7 +10,12 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdbool.h>
+#include <math.h>
+#include <portaudio.h>
 #include "utils/utils.h"
+
+#define FRAMES_PER_BUFFER 512
+
 // TODO
 // Receive path for write out file, on write out function  
 
@@ -120,6 +125,7 @@ int print_wav_info(WAVFormat *format, long data_offset, uint32_t data_size){
          
         printf("\n");    
     }
+    return 0;
 }
 
 int saveToPlot(int16_t *samples, long num_samples){
@@ -138,6 +144,7 @@ int saveToPlot(int16_t *samples, long num_samples){
     }
     
     fclose(plot);
+    return 0;
 }
 
 
@@ -169,7 +176,7 @@ void rms_display(const float *in)  {
     // Convert to dB
     float db;
     float scale = 20; 
-    db = db_convert(rms); 
+    db = dbToRms(rms); 
 
 
     printf("\rLevel: [");

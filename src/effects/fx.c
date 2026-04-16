@@ -11,6 +11,7 @@ int volumeReduction(int16_t *samples, long num_samples, int factor){
     for (int i=0; i<num_samples; i++){
         samples[i] = samples[i]/factor;
     } 
+    return 0;
 }
 
 

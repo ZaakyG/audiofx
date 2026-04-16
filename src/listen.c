@@ -2,11 +2,16 @@
 #include <stdlib.h>
 #include <portaudio.h>
 #include <math.h>
-#include "utils/utils.c"
+#include <stdint.h>
 
+#include "utils/utils.h"
+
+#define FRAMES_PER_BUFFER 512 
 #define SAMPLE_RATE 44100
-#define FRAMES_PER_BUFFER 512// Create db function
-                             //
+
+
+// Create db function
+/*
 float db_convert(float rms){
     float db = 20.0f * log10f(rms + 1e-6f);
     return db;
@@ -48,7 +53,7 @@ void rms_display(const float *in)  {
     //printf("\rRMS: %f", rms);
     fflush(stdout);
 }
-
+*/
 // Callback function to receive the audio samples 
 static int audio_callback(
     const void *inputBuffer, //where samples will be stored
@@ -63,10 +68,11 @@ static int audio_callback(
     (void) timeInfo;
     (void) statusFlags;
     (void) userData;
+    (void) framesPerBuffer;
 
     const float *in = (const float*)inputBuffer;
     
-    rms_display(in);
+    //rms_display(in);
 
     return paContinue;
 }
